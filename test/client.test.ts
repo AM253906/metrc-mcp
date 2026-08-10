@@ -115,16 +115,16 @@ describe("MetrcClient", () => {
     );
   });
 
-  test("serializes POST bodies as JSON arrays the way METRC write endpoints expect", async () => {
+  test("serializes write bodies as JSON arrays the way METRC write endpoints expect", async () => {
     mock.enqueueJson(undefined);
-    await client.post(
+    await client.put(
       "/packages/v2/finish",
       { licenseNumber: "PROC-000-TEST" },
       [{ Label: "1A4FF0100000022000000102", ActualDate: "2026-08-09" }]
     );
 
     const request = mock.requests[0];
-    assert.equal(request?.method, "POST");
+    assert.equal(request?.method, "PUT");
     const body = JSON.parse(request?.body ?? "[]") as Array<{ Label: string }>;
     assert.equal(body[0]?.Label, "1A4FF0100000022000000102");
   });

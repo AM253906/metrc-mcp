@@ -58,8 +58,16 @@ export class MetrcClient {
     return this.request<T>("POST", path, query, body);
   }
 
+  async put<T>(
+    path: string,
+    query: Record<string, string | undefined>,
+    body: unknown
+  ): Promise<T> {
+    return this.request<T>("PUT", path, query, body);
+  }
+
   private async request<T>(
-    method: "GET" | "POST",
+    method: "GET" | "POST" | "PUT",
     path: string,
     query: Record<string, string | undefined>,
     body?: unknown

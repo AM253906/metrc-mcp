@@ -83,7 +83,7 @@ export function registerPackageTools(
     },
     withErrors(async ({ label, actualDate, licenseNumber }) => {
       if (!config.allowWrites) throw new WritesDisabledError("finish_package");
-      await client.post(
+      await client.put(
         "/packages/v2/finish",
         { licenseNumber: client.resolveLicense(licenseNumber) },
         [{ Label: label.trim(), ActualDate: actualDate }]
